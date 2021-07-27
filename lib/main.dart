@@ -27,7 +27,7 @@ class todo extends StatefulWidget {
 class _todoState extends State<todo> {
   TextEditingController _task = TextEditingController();
 
-  final _taskList = <String>[];
+  List<String> taskList = [];
   final _savedTask = Set<String>();
 
   Widget viewList() {
@@ -37,38 +37,38 @@ class _todoState extends State<todo> {
 
       // padding: EdgeInsets.zero,
       itemBuilder: (context, index) {
+        final alreadySaved = _savedTask.contains(taskList[index]);
+        return ListTile(
+          title: Text(
+            taskList[index],
+            style: TextStyle(fontStyle: FontStyle.italic, fontSize: 20),
+          ),
+          tileColor: Colors.pink[100],
+          trailing: Icon(
+            alreadySaved ? Icons.check_box : Icons.check_box_outline_blank,
+            color: alreadySaved ? Colors.blueAccent : null,
+          ),
+          onTap: () {
 
-        return buildList(_taskList[index]);
+            setState(() {
+              if (alreadySaved) {
+              _savedTask.remove(taskList[index]);
+            } else {
+              _savedTask.add(taskList[index]);
+            }
+            print(_savedTask);
+            });
+            
+          },
+        );
       },
-      itemCount: _taskList.length,
+      itemCount: taskList.length,
     );
   }
 
-  Widget buildList(String task) {
-    final alreadySaved = _savedTask.contains(task);
-    return ListTile(
-      title: Text(
-        task.toUpperCase(),
-        style: TextStyle(fontStyle: FontStyle.italic, fontSize: 20),
-      ),
-      tileColor: Colors.pink[100],
-      trailing: Icon(
-        alreadySaved ? Icons.check_box : Icons.check_box_outline_blank,
-        color: alreadySaved ? Colors.blueAccent : null,
-      ),
-      onTap: () {
-        setState(() {
-          if (alreadySaved) {
-          _savedTask.remove(task);
-        } else {
-          _savedTask.add(task);
-        }
-        print(_savedTask);
-        });
-        
-      },
-    );
-  }
+  
+
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,8 +92,8 @@ class _todoState extends State<todo> {
                 onPressed: () {
                   setState(() {
                     var save = _task.text;
-                    _taskList.add(save);
-                    print(_taskList);
+                    taskList.add(save);
+                    print(taskList);
                   });
                 },
                 child: Icon(Icons.add),
@@ -108,7 +108,7 @@ class _todoState extends State<todo> {
               IconButton(
                 onPressed: () {
                   setState(() {
-                    _taskList.clear();
+                    taskList.clear();
                   });
                 },
                 icon: Icon(Icons.clear),
@@ -117,21 +117,21 @@ class _todoState extends State<todo> {
           ),
         ),
         drawer: Drawer(
-          child: _taskList.length != 0
+          child: taskList.length != 0
               ? ListView.builder(
                   // padding: EdgeInsets.zero,
                   // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(
-                        _taskList[index],
+                        taskList[index],
                         style: TextStyle(
                             fontStyle: FontStyle.italic, fontSize: 18),
                       ),
                       tileColor: Colors.amber[100],
                     );
                   },
-                  itemCount: _taskList.length,
+                  itemCount: taskList.length,
                 )
               : Center(
                   child: CircularProgressIndicator(),
