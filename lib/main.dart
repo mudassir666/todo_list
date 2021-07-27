@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: "TODO",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          brightness: Brightness.dark, primaryColor: Colors.grey[700]),
+          brightness: Brightness.light, primaryColor: Colors.blue),
       home: todo(),
     );
   }

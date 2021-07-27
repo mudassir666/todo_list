@@ -29,17 +29,24 @@ class _todoState extends State<todo> {
               fontStyle: FontStyle.italic,
               fontSize: 16,
               decoration: TextDecoration.underline,
-              color: Colors.red[900],
+              color: Colors.blue[600],
             ),
           ),
           title: Text(
             "${taskList[index]}",
-            style: TextStyle(fontStyle: FontStyle.italic, fontSize: 20,decoration: alreadySaved ? TextDecoration.lineThrough : TextDecoration.none,),
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+              fontSize: 20,
+              decoration: alreadySaved
+                  ? TextDecoration.lineThrough
+                  : TextDecoration.none,
+              color: alreadySaved ? Colors.grey : Colors.black,
+            ),
           ),
-          tileColor: Colors.pink[100],
+          tileColor: Colors.blue[50],
           trailing: Icon(
             alreadySaved ? Icons.check_box : Icons.check_box_outline_blank,
-            color: alreadySaved ? Colors.red[900] : null,
+            color: alreadySaved ? Colors.blue : null,
           ),
           onTap: () {
             setState(() {
@@ -70,7 +77,7 @@ class _todoState extends State<todo> {
             children: <Widget>[
               TextFormField(
                 keyboardAppearance: Brightness.dark,
-                cursorColor: Colors.red[900],
+                cursorColor: Colors.blue[600],
                 keyboardType: TextInputType.text,
                 controller: _task,
                 decoration: InputDecoration(
@@ -78,14 +85,14 @@ class _todoState extends State<todo> {
                         borderSide: BorderSide(
                             width: 2,
                             style: BorderStyle.solid,
-                            color: Colors.pink.shade100)),
+                            color: Colors.blue)),
                     hintText: "Enter A Task",
                     labelText: "TASK",
                     icon: Icon(
                       Icons.task,
-                      color: Colors.pink.shade100,
+                      color: Colors.blue,
                     ),
-                    labelStyle: TextStyle(color: Colors.pink.shade100)),
+                    labelStyle: TextStyle(color: Colors.blue)),
               ),
               SizedBox(height: 20),
               ElevatedButton(
@@ -99,7 +106,7 @@ class _todoState extends State<todo> {
                 child: Icon(Icons.add),
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.grey),
+                      MaterialStateProperty.all<Color>(Colors.blue),
                 ),
               ),
               SizedBox(height: 20),
@@ -111,7 +118,10 @@ class _todoState extends State<todo> {
                     taskList.clear();
                   });
                 },
-                icon: Icon(Icons.clear),
+                icon: Icon(
+                  Icons.clear,
+                  color: Colors.blue,
+                ),
               )
             ],
           ),
@@ -128,7 +138,7 @@ class _todoState extends State<todo> {
                         style: TextStyle(
                             fontStyle: FontStyle.italic, fontSize: 18),
                       ),
-                      tileColor: Colors.red[100],
+                      tileColor: Colors.blue,
                     );
                   },
                   itemCount: saved.length,
