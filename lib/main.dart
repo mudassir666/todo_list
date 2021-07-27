@@ -85,7 +85,7 @@ class _todoState extends State<todo> {
                 decoration: InputDecoration(
                     hintText: "Enter A Task",
                     labelText: "TASK",
-                    icon: Icon(Icons.task)),
+                    icon: Icon(Icons.task,color: Colors.pink[100],),),
               ),
               SizedBox(height: 20),
               ElevatedButton(
